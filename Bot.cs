@@ -5,7 +5,6 @@ using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Polling;
 
 namespace VoiceTexterBot
 {
@@ -42,7 +41,7 @@ namespace VoiceTexterBot
                 new ReceiverOptions() { AllowedUpdates = { } }, // Здесь выбираем, какие обновления хотим получать. В данном случае - разрешены все
                 cancellationToken: stoppingToken);
 
-            Console.WriteLine("Бот запущен.");
+            Console.WriteLine("Бот запущен");
         }
 
         async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)

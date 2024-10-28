@@ -14,4 +14,4 @@ namespace VoiceTexterBot.Services
         /// </summary>
         Session GetSession(long chatId);
     }
-}
+}    

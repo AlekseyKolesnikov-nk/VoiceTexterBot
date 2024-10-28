@@ -8,7 +8,6 @@ using VoiceTexterBot.Configuration;
 using VoiceTexterBot.Controllers;
 using VoiceTexterBot.Services;
 
-
 namespace VoiceTexterBot
 {
     public class Program
@@ -17,7 +16,10 @@ namespace VoiceTexterBot
         {
             return new AppSettings()
             {
-                BotToken = "7803686950:AAGfb_LoITqLbm2u7zVxxF5KdmsglLP7ayk"
+                DownloadsFolder = "C:\\Users\\evmor\\Downloads",
+                BotToken = "7803686950:AAGfb_LoITqLbm2u7zVxxF5KdmsglLP7ayk",
+                AudioFileName = "audio",
+                InputAudioFormat = "ogg",
             };
         }
 
@@ -41,6 +43,7 @@ namespace VoiceTexterBot
         {
             AppSettings appSettings = BuildAppSettings();
             services.AddSingleton(appSettings);
+            //services.AddSingleton<IFileHandler, AudioFileHandler>();
 
             services.AddSingleton<IStorage, MemoryStorage>();
 
@@ -50,9 +53,10 @@ namespace VoiceTexterBot
             services.AddTransient<TextMessageController>();
             services.AddTransient<InlineKeyboardController>();
 
-            services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient(appSettings.BotToken));
+            // Регистрируем объект TelegramBotClient c токеном подключения
+            services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient("7803686950:AAGfb_LoITqLbm2u7zVxxF5KdmsglLP7ayk"));
+            // Регистрируем постоянно активный сервис бота
             services.AddHostedService<Bot>();
         }
     }
 }
-
